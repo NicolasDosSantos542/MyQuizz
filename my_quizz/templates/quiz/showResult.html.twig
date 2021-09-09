@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="col-6 offset-3 mt-4 mb-3">
+            <h1 class="text-center">Résultat du Quizz : {{ quiz.idCategorie.name }}</h1>
+        </div>
+        <hr>
+        <h5 class="card-title quiz__card--name mt-3 mb-3">Résultat : {{ score.result }} / {{ score.nbrQuestion }}</h5>
+        <hr>
+        <hr>
+        {% for reponse in reponseDone %}
+            <p class="fst-italic"><span class="fw-bolder">Question posée :</span> <span class="fst-italic">{{ reponse.rep[0].idQuestion.question }}</span></p>
+            {% if reponse.rep[0].reponseExpected %}
+                <p><span class="fw-bolder">Vous avez répondu :</span> {{ reponse.rep[0].reponse }} <i class="far fa-thumbs-up goodAnswer"></i></p>
+            {% else %}
+                <p><span class="fw-bolder"><span class="text-danger">X </span>Vous avez répondu : </span> {{ reponse.rep[0].reponse }} <i class="fas fa-times wrongAnswer"></i></p>
+                <p><span class="fw-bolder"><span class="text-success">=></span> Réponse attendue: </span>{{ reponse.reponseExpected[0].reponse }} </i></p>
+            {% endif %}
+            <hr>
+        {% endfor %}
+
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+
+{% block body %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <p class="lead text-muted">
+                bonjour {{ user.getUsername }} , vous avez fait le quizz {{ category.name }}, c'est cool.
+
+            </p>
+            <p><a href="{{ path('home') }}">retour à l'accueil</a>
+            </p>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-3 mb-5">Gestion de profil</h1>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <div class="col-4">
+                <div>{{ me.mail }}</div>
+            </div>
+            <div class="col-4">
+                <a class="text-danger" href="{{ path('profile_mail') }}">Modifier mon E-mail</a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <div class="col-4">
+                <div>{{ me.username }}</div>
+            </div>
+            <div class="col-4">
+                <a class="text-danger" href="{{ path('profile_username') }}">Modifier mon nom d'utilisateur</a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <div class="col-4">
+                <div>• • • • • • • • • • • • •</div>
+            </div>
+            <div class="col-4">
+                <a class="text-danger" href="{{ path('profile_password') }}">Modifier mon mot de passe</a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <div class="col-8">
+                <a href="{{ path('profile_delete', {'id': user}) }}" class="btn btn-danger">Supprimer mon compte</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

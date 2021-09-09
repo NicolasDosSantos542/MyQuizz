@@ -1,0 +1,17 @@
+* {
+    font-family: 'Changa', sans-serif;
+}
+.logo_image {
+    width: 160px;
+}
+.navbar {
+    padding: 0!important;
+}
+html,
+body,
+.bg_dark--custom {
+    background-color: #161f1e !important;
+}
+.category_card--hover:hover {
+    box-shadow: 1px 1px 3px #f1f2f3;
+}

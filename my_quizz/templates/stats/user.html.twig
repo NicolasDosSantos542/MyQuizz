@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Gestion de {{ user.username }}</h1>
+    <table class="table text-light">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Date d'inscription</th>
+            <th scope="col">Date de verification</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Suppression</th>
+            <th scope="col">envoi email</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <th scope="row">{{ user.id }}</th>
+            <th>{{ user.mail }}</th>
+            <th>{{ user.username }}</th>
+            <th>
+                {% for role in user.roles %}
+                    {% if role == "ROLE_USER" %}
+                        Utilisateur
+                    {% elseif role == "ROLE_ADMIN" %}
+                        Administrateur
+                    {% endif %}
+                {% endfor %}
+            </th>
+            <th>{{ user.createdAt|date("d/m/y") }}</th>
+            <th>{{ user.verifiedAt|date("d/m/y") }}</th>
+            <th><a class="text-success" href="{{ path('modifier_utilisateur', {'id': user.id}) }}">Modifier</a></th>
+            <th><a href="{{ path('delete_utilisateur', {'id': user.id}) }}" class="btn btn-danger">Supprimer</a></th>
+            <th><a href="{{ path('send_validation', {'id': user.id ,'from': 'uniqueUser'}) }}" class="btn btn-success">Validation</a></th>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-5 mb-5"></div>
+    <div class="row text-center justify-content-center">
+        <div class="col-3">derniere connexion</div>
+        <div class="col-3">{{ user.LastLog|date("d/m/Y") }}</div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-4"> quizz effectués</div>
+        <div class="col-4">{{ statsCounts.all }}</div>
+        <div class="col-4">moyenne: {{ statsCounts.allNote }}</div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-4">sur un mois</div>
+        <div class="col-4">{{ statsCounts.month }}</div>
+        <div class="col-4">moyenne: {{ statsCounts.monthNote }}</div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-4">sur une semaine</div>
+        <div class="col-4">{{ statsCounts.week }}</div>
+        <div class="col-4">moyenne: {{ statsCounts.weekNote }}</div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-4">sur un jour</div>
+        <div class="col-4">{{ statsCounts.day }}</div>
+        <div class="col-4">moyenne: {{ statsCounts.dayNote }}</div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-4">sur un an</div>
+        <div class="col-4">{{ statsCounts.year }}</div>
+        <div class="col-4">moyenne: {{ statsCounts.yearNote }}</div>
+    </div>
+    <hr>
+
+{% endblock %}

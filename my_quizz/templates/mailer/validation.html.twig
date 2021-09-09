@@ -1,0 +1,30 @@
+
+{% block body %}
+
+
+
+
+
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Email </h1>
+            <p class="lead text-muted">
+                Félicitations {{ user.getUsername }} , vous êtes inscrit! vous allez pouvoir répondre à plein de questions, vous sentir intelligent et / ou apprendre des choses!
+            </p>
+            <p>Mais avant tout une dernière petite formalité: cliquez sur le bouton de validation ci-dessous pour terminer votre inscription</p>
+            <p>
+                <a href="http://localhost:8000/validation/{{ user.id }}" class="btn btn-primary">Valider mon inscription</a>
+            </p>
+
+        </div>
+    </section>
+
+
+    </div>
+
+
+
+    <div>email envoyé</div>
+
+{% endblock %}

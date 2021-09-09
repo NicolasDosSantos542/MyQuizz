@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Modifier nom d'utilisateur</h1>
+    <div class="row justify-content-center">
+        <div class="col-4 bg-dark p-4  rounded-3">
+            {{ form_start(form) }}
+            <div>
+                <label for="form_mail" class="form-label">Nom d'utilisateur</label>
+                {{ form_widget(form.username, {'attr' : {'class' : 'form-control bg-dark text-light'}}) }}
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-danger mt-4 col-6">Modifier</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
