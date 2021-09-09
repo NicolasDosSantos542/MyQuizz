@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Gestion admin. pour les utilisateurs</h1>
+    <hr>
+    <div class="row text-center">
+        <div class="col-8">Envoyer un email de rappel aux utilisateurs non connecté au cours du dernier mois</div>
+        <div class="col-4"><a class="text-success" href="{{ path('sendmail', {'what': 'doNoForget'}) }}">Envoyer</a></div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-8">Envoyer un email aux utilisateurs qui se sont connecté au cours du mois écoulé</div>
+        <div class="col-4"><a class="text-success" href="{{ path('sendmail', {'what': 'recall'}) }}">Envoyer</a></div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-3 text-center">
+            Total des membres inscrits
+        </div>
+        <div class="col-3 text-success text-center fw-bolder">
+            {{ howMany }}
+        </div>
+    </div>
+    <hr>
+    <table class="table text-light">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">mail</th>
+            <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Date d'inscription</th>
+            <th scope="col">Date de verification</th>
+            <th scope="col">derniere connexion</th>
+            <th scope="col">Envoi email</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Suppression</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+
+            <tr>
+                <th scope="row">{{ user.id }}</th>
+                <th><a class="text-danger" href="{{ path('user_stats', {'userId': user.id}) }}">{{ user.mail }}</a></th>
+                <th>{{ user.username }}</th>
+                <th>
+                    {# On boucle sur les rôles #}
+                    {% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}
+                            Utilisateur
+                        {% elseif role == "ROLE_ADMIN" %}
+                            Administrateur
+                        {% endif %}
+                    {% endfor %}
+                </th>
+                <th>{{ user.createdAt|date("d/m/y") }}</th>
+                <th>{{ user.verifiedAt|date("d/m/y") }}</th>
+                <th>{{ user.lastLog|date("d/m/y") }}</th>
+                <th><a href="{{ path('send_validation', {'id': user.id, 'from': 'utilisateurs'}) }}" class="btn btn-success">Validation</a></th>
+                <th><a class="text-success" href="{{ path('modifier_utilisateur', {'id': user.id}) }}">Modifier</a></th>
+                <th><a href="{{ path('delete_utilisateur', {'id': user.id}) }}" class="btn btn-danger">Supprimer</a>
+                </th>
+            </tr>        {% else %}
+            <p>Aucun utilisateur inscrit</p>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

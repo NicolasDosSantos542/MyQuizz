@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Modifier un utilisateur</h1>
+    <div class="row justify-content-center">
+        <div class="col-6 bg-dark p-4  rounded-3">
+            {{ form_start(userForm) }}
+            <div class="mt-3">
+                <label for="form_mail" class="form-label">E-mail</label>
+                {{ form_widget(userForm.mail, {'attr' : {'class' : 'form-control bg-dark text-light'}}) }}
+            </div>
+            <div class="mt-3">
+                <label for="form_username" class="form-label">Nom d'utilisateur</label>
+                {{ form_widget(userForm.username, {'attr' : {'class' : 'form-control bg-dark text-light'}}) }}
+            </div>
+            <div class="mt-3">
+                <label for="form_roles" class="form-label">Rôles</label>
+                <select name="role" class="form-select bg-dark text-light" aria-label="Default select example">
+                    <option value="ROLE_USER">Utilisateur</option>
+                    <option value="ROLE_ADMIN">Administrateur</option>
+                </select>
+            </div class="mt-3">
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-danger mt-4 col-5">Modifier l'utilisateur</button>
+            </div>
+            {{ form_end(userForm) }}
+        </div>
+    </div>
+
+{% endblock %}

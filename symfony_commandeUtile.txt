@@ -1,0 +1,197 @@
+composer create-project symfony/website-skeleton NomDeMonProjet -> créer le dossier avec le squelette du projet
+
+symfony server:start -> Démarre un serveur local nécéssite d'etre dans le dossier du project
+
+php bin/console make:controller -> Permet de fabriquer un controller simplement
+>NomDeMonController
+
+------------------------------------------------------------------------------------------------------------------
+.env = DATABASE_URL="mysql://USER:PSWD@127.0.0.1:3306/NOM_DE_LA_BDD?serverVersion=5.7"
+.env = DATABASE_URL="mysql://root:@127.0.0.1:3306/NOM_DE_LA_BDD?serverVersion=mariadb-10.4.11"
+
+
+php bin/console doctrine:database:create -> crée la BDD par rapport a la variable .env;
+
+------------------------------------------------------------------------------------------------------------------
+
+
+php bin/console make:entity -> Permet de créer une classe Entité qui représente une table
+>NomDeMaClasse
+
+>nom_de_ma_colone (camelCase car création d'une class -> mysql = camel_case)
+
+>propriété (string,dat,int) ? pour plus d'infos
+
+>length
+
+>null oui ? NomDeMonController
+
+>retour a nom de la colone
+
+php bin/console make:migration -> créer un fichier versioné dans migration avec des requete sql
+
+php bin/console doctrine:migration:migrate -> fait tourné tout les fichier de migration pour mettre a niveau la BDD
+
+------------------------------------------------------------------------------------------------------------------
+
+composer require orm-fixtures --dev -> permet de dl la librairie fixture
+
+php bin/console make:fixtures
+
+>Nom de la fixture(NomDeMaClasseFixtures)
+
+php bin/console doctrine:fixtures:load -> recharge les features (data fake) dans la bdd
+
+------------------------------------------------------------------------------------------------------------------
+
+CREER UNE ENTITY
+
+php bin/console make:entity
+
+ Class name of the entity to create or update (e.g. FiercePuppy):
+ > Category
+
+ created: src/Entity/Category.php
+ created: src/Repository/CategoryRepository.php
+ 
+ Entity generated! Now let's add some fields!
+ You can always add more fields later manually or by re-running this command.
+
+ New property name (press <return> to stop adding fields):
+ > title
+
+ Field type (enter ? to see all types) [string]:
+ >
+
+ Field length [255]:
+ >
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ >
+
+ updated: src/Entity/Category.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > description
+
+ Field type (enter ? to see all types) [string]:
+ >
+
+ Field length [255]:
+ > yes
+
+
+
+ [ERROR] Invalid length "yes".
+
+
+ Field length [255]:
+ >
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > yes
+
+ updated: src/Entity/Category.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > articles
+
+ Field type (enter ? to see all types) [string]:
+ > ?
+
+Main types
+  * string
+  * text
+  * boolean
+  * integer (or smallint, bigint)
+  * float
+
+Relationships / Associations
+  * relation (a wizard will help you build the relation)
+  * ManyToOne
+  * OneToMany
+  * ManyToMany
+  * OneToOne
+
+Array/Object Types
+  * array (or simple_array)
+  * json
+  * object
+  * binary
+  * blob
+
+Date/Time Types
+  * datetime (or datetime_immutable)
+  * datetimetz (or datetimetz_immutable)
+  * date (or date_immutable)
+  * time (or time_immutable)
+  * dateinterval
+
+Other Types
+  * ascii_string
+  * decimal
+  * guid
+  * json_array
+
+
+ Field type (enter ? to see all types) [string]:
+ > relation
+
+ What class should this entity be related to?:
+ > Article
+
+What type of relationship is this?
+ ------------ ----------------------------------------------------------------------- 
+  Type         Description                                                            
+ ------------ -----------------------------------------------------------------------
+  ManyToOne    Each Category relates to (has) one Article.
+               Each Article can relate to (can have) many Category objects
+
+  OneToMany    Each Category can relate to (can have) many Article objects.
+               Each Article relates to (has) one Category
+
+  ManyToMany   Each Category can relate to (can have) many Article objects.
+               Each Article can also relate to (can also have) many Category objects
+
+  OneToOne     Each Category relates to (has) exactly one Article.
+               Each Article also relates to (has) exactly one Category.
+ ------------ -----------------------------------------------------------------------
+
+ Relation type? [ManyToOne, OneToMany, ManyToMany, OneToOne]:
+ > OneToMany
+
+ A new property will also be added to the Article class so that you can access and set the related Category object from it.
+
+ New field name inside Article [category]:
+ >
+
+ Is the Article.category property allowed to be null (nullable)? (yes/no) [yes]:
+ > no
+
+ Do you want to activate orphanRemoval on your relationship?
+ A Article is "orphaned" when it is removed from its related Category.
+ e.g. $category->removeArticle($article)
+
+ NOTE: If a Article may *change* from one Category to another, answer "no".
+
+ Do you want to automatically delete orphaned App\Entity\Article objects (orphanRemoval)? (yes/no) [no]:
+ >
+
+------------------------------------------------------------------------------------------------------------------
+
+FORM
+
+php bin/console make:form 
+
+>NomDuFormulaireType
+
+>est ce qu'il se base sur une entité ?
+
+>Nom de l'entité
+------------------------------------------------------------------------------------------------------------------
+
+FAKER
+
+LIbrairie qui permettra de générer des données aléatoires
+
+composer require fzaninotto/faker --dev

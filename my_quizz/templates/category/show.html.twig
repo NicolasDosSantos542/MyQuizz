@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container bg-dark text-light p-5 mt-5 rounded-3">
+        <h5 class="card-title quiz__card--name mb-5 h6">Quizz : {{ quiz.idCategorie.name }}</h5>
+        <div class="question">
+            <div class="text-center h3 mb-5">{{ quiz.question }}</div>
+            <div class="row">
+
+                {% for reponse in reponses %}
+                    {% if quiz.id is same as(reponse.idQuestion.id) %}
+                        <div class="col-md-4">
+                            <a href="{{ path('quiz', {'id': quiz.idCategorie.id , 'question': quiz.id, 'nbrQuestion': 0, 'lastResponse': reponse.id }) }}">
+                                <div class="card quiz__card bg_dark--custom category_card--hover">
+                                    <div class="card-body">
+                                        <h5 class="card-title quiz__card--name text-light text-center">{{ reponse.reponse }}</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

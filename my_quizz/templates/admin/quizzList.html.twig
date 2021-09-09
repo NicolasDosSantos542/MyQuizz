@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Gestion des quizz</h1>
+    <table class="table text-light">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Déjà fait</th>
+            <th scope="col">Refaire ?</th>
+            <th scope="col">Ne l'ont pas fait</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Suppression</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+
+            <tr>
+                <th scope="row">{{ category.id }}</th>
+                <th><a class="text-light" href="{{ path('quizz_stats', {"id": category.id}) }}">{{ category.name }}</a></th>
+                <th>{{ category.count }}</th>
+                <th><a href="{{ path("send_quizz_email", {'what' : "quizzDone", "id" : category.id}) }}" class="btn btn-success">envoyer</a></th>
+                <th><a href="{{ path("send_quizz_email", {'what' : "noQuizzDone", "id":category.id}) }}" class="btn btn-success">Proposer le quizz</a></th>
+                <th><a class="text-success" href="#">Modifier</a></th>
+                <th><a href="#" class="btn btn-danger">Supprimer</a></th>
+            </tr>        {% else %}
+            <p>Aucun utilisateur inscrit</p>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+{% endblock %}

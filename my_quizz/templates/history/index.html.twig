@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-4 mb-4">Votre historique</h1>
+
+    <table class="table text-light">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if history | default %}
+            {% for data in history %}
+
+                <tr class="mt-1 mb-1">
+                    <th>{{ data.history.completedAt | date }}</th>
+                    <th>{{ data.categorie[0].name }}</th>
+                    <th>{{ data.history.note }} / {{ data.nbrQuestion }}</th>
+                </tr>
+
+            {% else %}
+                <p>{{ reponse }}</p>
+            {% endfor %}
+        {% else %}
+            <p>{{ reponse }}</p>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

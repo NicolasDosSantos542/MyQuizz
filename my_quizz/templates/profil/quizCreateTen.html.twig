@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Creation d'un quiz</h1>
+    {% set nbrQuestion = 9 %}
+    <div class="row justify-content-center">
+        <div class="col-8 bg-dark p-4  rounded-3">
+            <form method="post">
+                <div class="form-group mb-5">
+                    <label for="categorie">Nom de la catégorie</label>
+                    <input class="form-control bg-dark text-light" type="text" name="categorie" id="categorie" required>
+                </div>
+
+                {% for i in 0.. nbrQuestion %}
+                    <div class="form-group mb-4">
+                        <div class="col-5">
+                            <label for="question{{ i }}">question {{ i+1 }}</label>
+                            <input class="form-control bg-dark text-light" type="text" id="question{{ i }}" name="question{{ i }}" required>
+                        </div>
+
+                        {% for j in i*3.. i*3+2 %}
+                            {% if j is same as (i*3) %}
+                                <label for="reponse{{ j }}">Bonne reponse {{ i+1 }}</label>
+                                <input class="form-control bg-success text-light" type="text" id="reponse{{ j }}" name="reponse{{ j }}" required>
+                            {% else %}
+                                <label for="reponse{{ j }}">reponse {{ i+1 }}</label>
+                                <input class="form-control bg-danger text-light" type="text" id="reponse{{ j }}" name="reponse{{ j }}" required>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <hr>
+                {% endfor %}
+                <div class="row justify-content-center mt-3">
+                    <button type="submit" class="btn btn-success col-4">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
